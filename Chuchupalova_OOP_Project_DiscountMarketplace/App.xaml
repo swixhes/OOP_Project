@@ -1,0 +1,9 @@
+﻿<Application x:Class="Chuchupalova_OOP_Project_DiscountMarketplace.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
