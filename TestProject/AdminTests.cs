@@ -44,10 +44,10 @@ namespace TestProject
         [TestMethod]
         public void BlockUser_ShouldAddUserToBlockedList()
         {
-            var admin = new Admin(1, "admin@a.com", "Test", "Admin", "+38(050)-1111111", "admin123");
-            var user = new RegisteredUser(2, "user@a.com", "User", "U", "+38(050)-1234567", "pass", 100);
+            var admin = new Admin(1, "admin@a.com", "Адмін", "Адмінович", "+38(050)-1234567", "admin123");
+            var user = new RegisteredUser(2, "user@a.com", "Ім'я", "Прізвище", "+38(050)-1234567", "pass", 100);
 
-            bool result = admin.BlockUser(2);
+            bool result = admin.BlockUser(user.Id);
 
             Assert.IsTrue(result);
             Assert.IsTrue(admin.BlockedUsers.Contains(user));
@@ -56,15 +56,16 @@ namespace TestProject
         [TestMethod]
         public void UnblockUser_ShouldRemoveUserFromBlockedList()
         {
-            var admin = new Admin(1, "admin@a.com", "Test", "Admin", "+38(050)-1111111", "admin123");
-            var user = new RegisteredUser(2, "user@a.com", "User", "U", "+38(050)-1234567", "pass", 100);
-            admin.BlockUser(2);
+            var admin = new Admin(1, "admin@a.com", "Адмін", "Адмінович", "+38(050)-1234567", "admin123");
+            var user = new RegisteredUser(2, "user@a.com", "Ім'я", "Прізвище", "+38(050)-1234567", "pass", 100);
+            admin.BlockUser(user.Id);
 
-            bool result = admin.UnblockUser(2);
+            bool result = admin.UnblockUser(user.Id);
 
             Assert.IsTrue(result);
             Assert.IsFalse(admin.BlockedUsers.Contains(user));
         }
+
         [TestMethod]
         public void EditCoupon_ShouldReplaceCoupon()
         {

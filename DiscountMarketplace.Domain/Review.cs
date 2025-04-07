@@ -13,7 +13,8 @@ namespace DiscountMarketplace.Domain
 
         public static void AddReview(Review review)
         {
-            throw new NotImplementedException();
+            if (review != null && !allReviews.Any(r => r.Id == review.Id))
+                allReviews.Add(review);
         }
 
         public static List<Review> GetReviewsByCouponId(int couponId) =>
@@ -28,7 +29,17 @@ namespace DiscountMarketplace.Domain
 
         public Review(int id, int couponId, RegisteredUser author, int rating, string comment = "")
         {
-            throw new NotImplementedException();
+            if (id <= 0) throw new ArgumentException("ID має бути більше 0.");
+            if (author == null) throw new ArgumentNullException(nameof(author));
+            if (rating < 1 || rating > 5) throw new ArgumentException("Оцінка має бути від 1 до 5.");
+
+            Id = id;
+            CouponId = couponId;
+            Author = author;
+            Rating = rating;
+            Comment = comment;
+
+            AddReview(this);
         }
     }
 }

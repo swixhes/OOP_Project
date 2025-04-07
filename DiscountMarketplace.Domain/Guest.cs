@@ -15,17 +15,19 @@ namespace DiscountMarketplace.Domain
 
         public override bool Login(string email, string password)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public List<Coupon> ViewCoupons()
         {
-            throw new NotImplementedException();
+            return Coupon.GetAllCoupons()
+                         .Where(c => AvailableCategories.Contains(c.Category))
+                         .ToList();
         }
 
         public List<Review> ViewReviews(int couponId)
         {
-            throw new NotImplementedException();
+            return Review.GetReviewsByCouponId(couponId);
         }
     }
 }
