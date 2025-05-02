@@ -9,19 +9,12 @@ namespace DiscountMarketplace.Domain
     public class Order
     {
         private static int nextId = 1;
+        private static Dictionary<RegisteredUser, List<Coupon>> cart = new();
 
         public int Id { get; }
         public RegisteredUser User { get; }
         public Coupon Coupon { get; }
         public DateTime PurchaseDate { get; }
-
-        public Coupon Coupons
-        {
-            get => default;
-            set
-            {
-            }
-        }
 
         public Order(RegisteredUser user, Coupon coupon, DateTime purchaseDate)
         {
@@ -43,6 +36,31 @@ namespace DiscountMarketplace.Domain
                 return true;
             }
             return false;
+        }
+
+        // CartManager logic
+        public static void AddToCart(RegisteredUser user, Coupon coupon)
+        {
+            if (!cart.ContainsKey(user))
+                cart[user] = new List<Coupon>();
+            if (!cart[user].Contains(coupon))
+                cart[user].Add(coupon);
+        }
+
+        public static List<Coupon> GetCart(RegisteredUser user)
+        {
+            return cart.ContainsKey(user) ? new List<Coupon>(cart[user]) : new List<Coupon>();
+        }
+
+        public static void ClearCart(RegisteredUser user)
+        {
+            if (cart.ContainsKey(user))
+                cart[user].Clear();
+        }
+
+        public static bool IsInCart(RegisteredUser user, Coupon coupon)
+        {
+            return cart.ContainsKey(user) && cart[user].Contains(coupon);
         }
     }
 }

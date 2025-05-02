@@ -11,6 +11,7 @@ namespace DiscountMarketplace.Domain
         private string lastName;
         private string phoneNumber;
         internal int Id;
+        public string Password { get; protected set; }
 
         public event EventHandler<string> Notification;
 
@@ -19,11 +20,12 @@ namespace DiscountMarketplace.Domain
             get => email;
             set
             {
-                if (string.IsNullOrWhiteSpace(value) || !value.Contains("@"))
-                    throw new ArgumentException("Невірний формат електронної пошти.");
+                if (string.IsNullOrWhiteSpace(value) || !value.Contains("@") || value.Length < 8)
+                    throw new ArgumentException("Невірний формат електронної пошти або замало символів.");
                 email = value;
             }
         }
+        
 
         public string FirstName
         {

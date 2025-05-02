@@ -13,7 +13,7 @@ namespace TestProject
         [TestMethod]
         public void MarkAsUsed_Valid_ShouldDecreaseUsageLimit()
         {
-            var coupon = new Coupon(1, "Test", CouponCategory.Sport, DateTime.Now.AddDays(1), 15, 2);
+            var coupon = new Coupon(1, "Test", CouponCategory.Sport, DateTime.Now.AddDays(1), 15, 2, "Images/food_coupon.jpg");
 
             bool result = coupon.MarkAsUsed();
 
@@ -24,7 +24,7 @@ namespace TestProject
         [TestMethod]
         public void IsValid_Expired_ReturnsFalse()
         {
-            var coupon = new Coupon(2, "Expired", CouponCategory.Food, DateTime.Now.AddDays(-1), 10, 1, true);
+            var coupon = new Coupon(2, "Expired", CouponCategory.Food, DateTime.Now.AddDays(-1), 10, 1, "Images/food_coupon.jpg");
 
             Assert.IsFalse(coupon.IsValid());
 
