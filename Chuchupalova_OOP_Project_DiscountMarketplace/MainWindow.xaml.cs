@@ -80,6 +80,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                     {
                         Width = 250,
                         Height = 150,
+                        Stretch = Stretch.UniformToFill,
                         Margin = new Thickness(0, 0, 0, 10),
                         Source = new BitmapImage(new Uri(coupon.ImagePath, UriKind.Relative))
                     };

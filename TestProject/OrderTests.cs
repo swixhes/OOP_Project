@@ -14,7 +14,7 @@ namespace TestProject
         public void Constructor_ValidData_ShouldCreateOrder()
         {
             var user = new RegisteredUser(1, "a@a.com", "Ім'я", "Прізвище", "+38(050)-1234567", "pass", 100);
-            var coupon = new Coupon(1, "Test", CouponCategory.Food, DateTime.Now.AddDays(1), 10, 1);
+            var coupon = new Coupon(1, "Тест", CouponCategory.Travel, DateTime.Now.AddDays(-1), 25, 30, "Images/coupon.jpg", "Опис");
             var order = new Order(user, coupon, DateTime.Now);
 
             Assert.AreEqual(user, order.User);
@@ -25,7 +25,7 @@ namespace TestProject
         public void ConfirmPurchase_Valid_ShouldMarkUsed()
         {
             var user = new RegisteredUser(1, "a@a.com", "Ім'я", "Прізвище", "+38(050)-1234567", "pass", 100);
-            var coupon = new Coupon(2, "Test", CouponCategory.Food, DateTime.Now.AddDays(1), 10, 1);
+            var coupon = new Coupon(1, "Тест", CouponCategory.Travel, DateTime.Now.AddDays(-1), 25, 30, "Images/coupon.jpg", "Опис");
             var order = new Order(user, coupon, DateTime.Now);
 
             bool result = order.ConfirmPurchase();

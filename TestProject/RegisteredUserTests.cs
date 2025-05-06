@@ -27,39 +27,6 @@ namespace TestProject
         }
 
         [TestMethod]
-        public void PurchaseCoupon_ValidCoupon_ShouldSucceed()
-        {
-            // Arrange
-            var coupon = new Coupon(1, "Знижка 20%", CouponCategory.Food, DateTime.Now.AddDays(5), 30, 20, "Images/beauty_coupon.jpg", "Соковита піца з сиром та ковбаскою – зі знижкою 20%!");
-            var user = new RegisteredUser(2, "shopper@mail.com", "Олег", "Коваль", "+38(093)-1122334", "pass", 100);
-
-            // Act
-            bool result = user.PurchaseCoupon(coupon);
-
-            // Assert
-            Assert.IsTrue(result);
-            Assert.AreEqual(1, user.PurchasedCoupons.Count);
-        }
-
-        [TestMethod]
-        public void ReturnCoupon_Valid_ShouldRestoreBalance()
-        {
-            // Arrange
-            var coupon = new Coupon(2, "Карпати", CouponCategory.Travel, DateTime.Now.AddDays(5), 40, 10, "Images/beauty_coupon.jpg", "Соковита піца з сиром та ковбаскою – зі знижкою 20%!");
-            var user = new RegisteredUser(3, "reader@mail.com", "Марія", "Левченко", "+38(096)-4455667", "123", 100);
-            user.PurchaseCoupon(coupon);
-            double balanceBefore = user.Balance;
-
-            // Act
-            bool result = user.ReturnCoupon(coupon.Id);
-
-            // Assert
-            Assert.IsTrue(result);
-            Assert.AreEqual(balanceBefore + coupon.Price, user.Balance);
-            Assert.AreEqual(0, user.PurchasedCoupons.Count);
-        }
-
-        [TestMethod]
         public void Balance_SetNegative_ShouldThrow()
         {
             // Arrange
@@ -68,13 +35,21 @@ namespace TestProject
             // Act & Assert
             Assert.ThrowsException<ArgumentException>(() => user.Balance = -10);
         }
+
         [TestMethod]
         public void DeleteReview_ValidReviewOwnedByUser_ShouldRemoveReview()
         {
             // Arrange
             var user = new RegisteredUser(1, "test@test.com", "Іван", "Іванов", "+38(050)-1234567", "pass123", 100);
+            var coupon = new Coupon(100, "Піца", CouponCategory.Food, DateTime.Now.AddDays(1), 20, 5, "", "Смачно!");
+
+            // Імітація, ніби купон і користувач вже в системі
+            Coupon.GetAllCoupons().Add(coupon);
+            RegisteredUser.GetAllUsers().Add(user);
+
             var review = new Review(1, user, 5, "Гарно");
-           
+            Review.AddReview(review);
+            
             // Act
             bool result = user.DeleteReview(1);
 
@@ -89,6 +64,7 @@ namespace TestProject
         {
             // Arrange
             var user = new RegisteredUser(1, "test@test.com", "Іван", "Іванов", "+38(050)-1234567", "pass123", 100);
+            RegisteredUser.GetAllUsers().Add(user); // щоб метод DeleteReview міг знайти користувача в глобальному списку
 
             // Act
             bool result = user.DeleteReview(999);
@@ -97,6 +73,28 @@ namespace TestProject
             Assert.IsFalse(result);
         }
 
-    }
+        [TestMethod]
+        public void ReturnCoupon_Valid_ShouldRestoreBalance()
+        {
+            // Arrange
+            var coupon = new Coupon(2, "Карпати", CouponCategory.Travel, DateTime.Now.AddDays(5), 40, 10, "Images/beauty_coupon.jpg", "Соковита піца з сиром та ковбаскою – зі знижкою 20%!");
+            var user = new RegisteredUser(3, "reader@mail.com", "Марія", "Левченко", "+38(096)-4455667", "123!Test", 100);
+            double initialBalance = user.Balance;
 
+            Order.AddToCart(user, coupon);     // Додаємо купон у кошик
+            Order.PlaceOrder(user);            // Купуємо
+
+            // Переконайся, що купівля відбулась
+            Assert.AreEqual(1, user.PurchasedCoupons.Count);
+            Assert.AreEqual(initialBalance - coupon.Price, user.Balance, 0.01);
+
+            // Act
+            bool result = user.ReturnCoupon(coupon.Id);
+
+            // Assert
+            Assert.IsTrue(result);
+            Assert.AreEqual(initialBalance, user.Balance, 0.01); // баланс має повернутись до початкового
+            Assert.AreEqual(0, user.PurchasedCoupons.Count);
+        }
+    }
 }

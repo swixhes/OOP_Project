@@ -16,8 +16,8 @@ namespace TestProject
             var guest = new Guest(1, "a@a.com", "Ім'я", "Прізвище", "+38(050)-1234567");
             guest.AvailableCategories.Add(CouponCategory.Travel);
 
-            var travelCoupon = new Coupon(1, "Trip", CouponCategory.Travel, DateTime.Now.AddDays(5), 20, 1);
-            var foodCoupon = new Coupon(2, "Pizza", CouponCategory.Food, DateTime.Now.AddDays(5), 10, 1);
+            //var travelCoupon = new Coupon(1, "Trip", CouponCategory.Travel, DateTime.Now.AddDays(5), 20, 1);
+            var foodCoupon = new Coupon(1, "Знижка 20%", CouponCategory.Food, DateTime.Now.AddDays(5), 30, 20, "Images/coupon.jpg", "Опис");
 
             var result = guest.ViewCoupons();
 

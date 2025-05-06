@@ -22,7 +22,7 @@ namespace DiscountMarketplace.Domain
         public Order(RegisteredUser user, Coupon coupon, DateTime purchaseDate)
         {
             if (user == null) throw new ArgumentNullException(nameof(user));
-            if (coupon == null || !coupon.IsValid()) throw new ArgumentException("Купон має бути дійсним.");
+            if (coupon == null /*|| !coupon.IsValid()*/) throw new ArgumentException("Купон має бути дійсним.");
             if (purchaseDate > DateTime.Now) throw new ArgumentException("Дата покупки не може бути в майбутньому.");
 
             Id = nextId++;
@@ -55,6 +55,10 @@ namespace DiscountMarketplace.Domain
             if (actualCoupon == null)
                 throw new ArgumentException("Купон не знайдено.");
 
+            // Додана перевірка на дійсність
+            if (!actualCoupon.IsValid())
+                throw new InvalidOperationException($"Купон \"{actualCoupon.Name}\" більше не дійсний і не може бути доданий до кошика.");
+
             if (!cart.ContainsKey(user))
                 cart[user] = new List<CartItemModel>();
 
@@ -64,6 +68,7 @@ namespace DiscountMarketplace.Domain
             else
                 cart[user].Add(new CartItemModel { Coupon = actualCoupon, Quantity = 1 });
         }
+
 
         public static List<CartItemModel> GetCart(RegisteredUser user)
         {
@@ -121,11 +126,17 @@ namespace DiscountMarketplace.Domain
             {
                 for (int i = 0; i < item.Quantity; i++)
                 {
+                    if (!item.Coupon.IsValid())
+                    {
+                        throw new ArgumentException($"Купон {item.Coupon.Name} більше не дійсний і буде пропущений.");
+                    }
+
                     var order = new Order(user, item.Coupon, DateTime.Now);
                     if (!order.ConfirmPurchase())
                         throw new ArgumentException($"Не вдалося купити купон: {item.Coupon.Name}");
                 }
             }
+
 
             user.Balance -= total;
             ClearCart(user);

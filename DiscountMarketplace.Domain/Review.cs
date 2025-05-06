@@ -26,7 +26,8 @@ public class Review
     public int CouponId { get; }
     public RegisteredUser Author { get; }
     public int Rating { get; private set; }
-    public string Comment { get; }
+    public string Comment { get; set; }
+
 
     public Review(int couponId, RegisteredUser author, int rating, string comment = "")
     {

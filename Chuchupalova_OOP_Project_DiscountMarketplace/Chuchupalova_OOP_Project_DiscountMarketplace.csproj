@@ -10,19 +10,45 @@
   <ItemGroup>
     <None Remove="DealHive.png" />
     <None Remove="DealHive2.png" />
+    <None Remove="Images\alpaca_coupon.jpg" />
+    <None Remove="Images\barista_coupon.jpg" />
     <None Remove="Images\beauty_coupon.jpg" />
+    <None Remove="Images\burger_coupon.jpg" />
     <None Remove="Images\DealHive.png" />
     <None Remove="Images\DealHive2.png" />
     <None Remove="Images\entertainment_coupon.jpg" />
     <None Remove="Images\food_coupon.jpg" />
+    <None Remove="Images\glowup_coupon.jpg" />
+    <None Remove="Images\ice_coupon.jpg" />
+    <None Remove="Images\kamianets_coupon.jpg" />
+    <None Remove="Images\kidspark_coupon.png" />
+    <None Remove="Images\lviv_coupon.jpeg" />
+    <None Remove="Images\lviv_coupon.jpg" />
+    <None Remove="Images\nails_coupon.jpg" />
+    <None Remove="Images\nails_coupon.png" />
+    <None Remove="Images\planetarium_coupon.jpg" />
+    <None Remove="Images\quest_coupon.jpg" />
     <None Remove="Images\search_icon.png" />
     <None Remove="Images\sport_coupon.jpg" />
+    <None Remove="Images\sushi_coupon.jpg" />
+    <None Remove="Images\swimming_coupon.jpg" />
     <None Remove="Images\travel_coupon.jpg" />
+    <None Remove="Images\vegan_coupon.jpg" />
+    <None Remove="Images\yoga_rooftop.jpg" />
     <None Remove="search_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Images\alpaca_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\barista_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\beauty_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\burger_coupon.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\DealHive.png">
@@ -37,13 +63,52 @@
     <Content Include="Images\food_coupon.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\glowup_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\ice_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kamianets_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kidspark_coupon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\lviv_coupon.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nails_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\nails_coupon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\planetarium_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\quest_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\search_icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\sport_coupon.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\sushi_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\swimming_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\travel_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\vegan_coupon.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\yoga_rooftop.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

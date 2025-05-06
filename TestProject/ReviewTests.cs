@@ -15,7 +15,7 @@ namespace TestProject
         {
 
             var user = new RegisteredUser(1, "a@a.com", "Ім'я", "Прізвище", "+38(050)-1234567", "pass", 0);
-            var review = new Review(1, 10, user, 5, "Коментар");
+            var review = new Review(1, user, 5, "Відгук");
 
             var reviews = Review.GetReviewsByCouponId(10);
             CollectionAssert.Contains(reviews, review);

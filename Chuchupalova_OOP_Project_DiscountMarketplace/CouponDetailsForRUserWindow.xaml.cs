@@ -59,7 +59,13 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         {
 
             ReviewList.ItemsSource = null;
-            ReviewList.ItemsSource = Review.GetReviewsByCouponId(coupon.Id);
+            ReviewList.ItemsSource = Review.GetReviewsByCouponId(coupon.Id)
+    .Select(r => new
+    {
+        Review = r,
+        IsOwner = r.Author.Id == user.Id
+    }).ToList();
+
             //JsonStorage.LoadReviewsFromJson(RegisteredUser.GetAllUsers());
         }
 
@@ -71,10 +77,21 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
-            Order.AddToCart(user, coupon);
-            MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            try
+            {
+                Order.AddToCart(user, coupon);
+                MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Сталася непередбачена помилка: " + ex.Message, "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
@@ -113,5 +130,27 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             JsonStorage.SaveReviewsToJson(Review.GetAllReviews());
 
         }
+        private void DeleteReview_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var dataContext = button?.DataContext;
+
+            // Витягуємо сам Review з анонімного об’єкта
+            var reviewProperty = dataContext?.GetType().GetProperty("Review");
+            var review = reviewProperty?.GetValue(dataContext) as Review;
+            if (review == null) return;
+
+            if (user.DeleteReview(review.Id))
+            {
+                MessageBox.Show("Відгук видалено.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                JsonStorage.SaveReviewsToJson(Review.GetAllReviews());
+                LoadReviews();
+            }
+            else
+            {
+                MessageBox.Show("Не вдалося видалити відгук.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
     }
 }
