@@ -45,14 +45,72 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             }
             else
             {
-                MessageBox.Show("Невірний email або пароль.", "Помилка входу", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    ErrorTextBlock.Visibility = Visibility.Visible;
+                
             }
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
             var registrationWindow = new RegistrationWindow();
+            this.Close();
             registrationWindow.Show();
         }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender == EmailTextBox)
+            {
+                EmailPlaceholder.Visibility = string.IsNullOrEmpty(EmailTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+                ErrorTextBlock.Visibility = Visibility.Collapsed;
+            }
+            //else if (sender == FirstNameBox)
+            //    FirstNamePlaceholder.Visibility = string.IsNullOrEmpty(FirstNameBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            //else if (sender == LastNameBox)
+            //    LastNamePlaceholder.Visibility = string.IsNullOrEmpty(LastNameBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            //else if (sender == PhoneBox)
+            //    PhonePlaceholder.Visibility = string.IsNullOrEmpty(PhoneBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            //else if (sender == BalanceBox)
+            //    BalancePlaceholder.Visibility = string.IsNullOrEmpty(BalanceBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private bool isPasswordVisible = false;
+
+        private void TogglePasswordVisibility(object sender, RoutedEventArgs e)
+        {
+            isPasswordVisible = !isPasswordVisible;
+
+            if (isPasswordVisible)
+            {
+                VisiblePasswordBox.Text = PasswordBox.Password;
+                PasswordBox.Visibility = Visibility.Collapsed;
+                VisiblePasswordBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PasswordBox.Password = VisiblePasswordBox.Text;
+                PasswordBox.Visibility = Visibility.Visible;
+                VisiblePasswordBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!isPasswordVisible)
+                VisiblePasswordBox.Text = PasswordBox.Password;
+        }
+
+        private void VisiblePasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isPasswordVisible)
+                PasswordBox.Password = VisiblePasswordBox.Text;
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            this.Close();
+            mainWindow.Show();
+        }
+
     }
 }

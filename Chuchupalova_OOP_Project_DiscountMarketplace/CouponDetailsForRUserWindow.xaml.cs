@@ -24,13 +24,16 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         private readonly RegisteredUser user;
 
         public CouponDetailsForRUserWindow(Coupon coupon, RegisteredUser user)
-        {
+        { 
             InitializeComponent();
+            JsonStorage.LoadCouponsFromJson();
+            
 
             this.coupon = coupon ?? throw new ArgumentNullException(nameof(coupon));
             this.user = user ?? throw new ArgumentNullException(nameof(user));
 
             LoadCouponDetails();
+
             LoadReviews();
         }
 
@@ -54,7 +57,10 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void LoadReviews()
         {
+
+            ReviewList.ItemsSource = null;
             ReviewList.ItemsSource = Review.GetReviewsByCouponId(coupon.Id);
+            //JsonStorage.LoadReviewsFromJson(RegisteredUser.GetAllUsers());
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -67,12 +73,15 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         {
             Order.AddToCart(user, coupon);
             MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
-        private void AddToCartButton_Click(object sender, RoutedEventArgs e)
+        private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            Order.AddToCart(user, coupon);
-            MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            var cartWindow = new CartWindow(user);
+            cartWindow.Show();
+            //Order.AddToCart(user, coupon);
+            //MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SubmitReview_Click(object sender, RoutedEventArgs e)
@@ -101,6 +110,8 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             ReviewBox.Clear();
             RatingBox.SelectedIndex = -1;
             LoadReviews();
+            JsonStorage.SaveReviewsToJson(Review.GetAllReviews());
+
         }
     }
 }

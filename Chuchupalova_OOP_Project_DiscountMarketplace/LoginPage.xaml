@@ -5,18 +5,95 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
         mc:Ignorable="d"
-        Title="LoginPage" Height="450" Width="800">
+        Title="DealHive – Вхід" Height="500" Width="400" Background="#FFF9FAFB" WindowStartupLocation="CenterScreen">
+
     <Grid Margin="20">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" >
-            <TextBlock Text="Email:"/>
-            <TextBox x:Name="EmailTextBox" Height="30"/>
 
-            <TextBlock Text="Пароль:"/>
-            <PasswordBox x:Name="PasswordBox" Height="30"/>
+        <Button Content="➜"
+        Width="35" Height="35"
+                FontSize="25"
+        HorizontalAlignment="Left" VerticalAlignment="Top"
+        Background="White" Foreground="#FF6600"
+                
+        FontWeight="Bold" Click="BackButton_Click" BorderBrush="{x:Null}" RenderTransformOrigin="0.497,0.701" Margin="-1,-3,0,0">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180.638"/>
+                    <TranslateTransform X="0.131" Y="-14.071"/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
 
-            <Button Content="Увійти" Click="LoginButton_Click" Height="40" Margin="0,10,0,0"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <Image Source="Images/DealHive.png" Height="80" Margin="0,0,0,20" HorizontalAlignment="Center"/>
 
-            <Button Content="Зареєструватися" Click="RegisterButton_Click" Height="40"/>
+            <TextBlock Margin="10" TextWrapping="Wrap" FontSize="14" TextAlignment="Center" Foreground="#444">
+			Увійдіть для можливості купувати купони на послуги.
+            </TextBlock>
+
+
+            <Grid Margin="0,5" Height="35" Background="White">
+                <TextBox x:Name="EmailTextBox"  VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                <TextBlock x:Name="EmailPlaceholder" Height="40"  Text="Логін*" 
+           FontSize="13"  Foreground="Gray"  Margin="5,9.8,10,10" VerticalAlignment="Center"
+           IsHitTestVisible="False" FontFamily="Sans Serif Collection" />
+            </Grid>
+            <!--<Grid Margin="0,5" Height="35">
+                <TextBox x:Name="EmailBox" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                <TextBlock x:Name="EmailPlaceholder" Text="Логін*" 
+               Foreground="Gray" Margin="5,0,0,0" VerticalAlignment="Center"
+               IsHitTestVisible="False" FontFamily="Sans Serif Collection"/>
+            </Grid>-->
+
+            <!--<TextBox x:Name="EmailTextBox" Height="40" 
+                     FontSize="14" Padding="10" Margin="0,0,0,10" Background="White" BorderBrush="#DDD"/>-->
+
+            <!--<PasswordBox x:Name="PasswordBox" Height="40" 
+                         FontSize="14" Padding="10" Margin="0,0,0,10" Background="White" BorderBrush="#DDD"/>-->
+            <Grid Margin="0,5">
+                <!-- Закритий пароль -->
+                <PasswordBox x:Name="PasswordBox" Height="35" Margin="0,0,40,10"  
+                 FontFamily="Sans Serif Collection" 
+                 FontSize="12"
+                 Visibility="Visible"
+                 PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                <!-- Відкритий пароль -->
+                <TextBox x:Name="VisiblePasswordBox" Height="35" Margin="0,0,0,10"  
+             FontFamily="Sans Serif Collection" 
+                         FontSize="12"
+             Visibility="Collapsed"
+             TextChanged="VisiblePasswordBox_TextChanged"/>
+
+                <!-- Кнопка перегляду -->
+                <Button Content="👁" Width="35" Height="35" VerticalAlignment="Top"  
+            HorizontalAlignment="Right" Margin="0,0,0,0" 
+            Click="TogglePasswordVisibility"/>
+            </Grid>
+
+            <!-- Помилка -->
+            <!--<TextBlock x:Name="ErrorTextBlock" Text="Помилка: Невірний логін або пароль" 
+                       Foreground="Red" FontSize="12" Visibility="Collapsed" TextAlignment="Center" Margin="0,0,0,10"/>-->
+
+            <Border x:Name="ErrorTextBlock"  Margin="0,5" Padding="5" Background="#FFF" BorderBrush="#FFFF5353" Visibility="Collapsed" BorderThickness="1" CornerRadius="5">
+                <StackPanel>
+                    <TextBlock Text="Помилка: Невірний логін або пароль" 
+           Foreground="Red" FontSize="12" TextAlignment="Center" Margin="0,5,0,5"/>
+                </StackPanel>
+            </Border>
+
+
+            <Button Content="Увійти" Click="LoginButton_Click"
+                    Height="45" Background="#FF6600" Foreground="White"
+                    FontWeight="Bold" Margin="0,10,0,10" BorderBrush="#FFFF6600"/>
+            <!-- Нижній текст -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <TextBlock Text="Вже маєте акаунт? " FontSize="14" FontFamily="Sans Serif Collection"/>
+                <TextBlock Text="Зареєструватися" FontSize="14" Foreground="OrangeRed" Cursor="Hand" MouseDown="RegisterButton_Click" FontFamily="Sans Serif Collection"/>
+            </StackPanel>
+
         </StackPanel>
     </Grid>
 </Window>

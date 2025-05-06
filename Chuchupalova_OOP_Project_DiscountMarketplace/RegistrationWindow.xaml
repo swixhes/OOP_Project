@@ -5,17 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="768" Width="800" Background="#F8F9FA">
+        Title="RegistrationWindow" Height="768" Width="800" Background="#F8F9FA" WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+        <Button Content="➜"
+                Width="45" Height="45"
+                FontSize="30"
+                HorizontalAlignment="Left" VerticalAlignment="Top"
+                Background="#F8F9FA" Foreground="#FF6600" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" Click="Button_Click">
+            
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180.511"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
         <!-- Логотип -->
         <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,10,0,20">
-            <Image Source="DealHive.png" Width="120" Height="120"/>
+            <Image Source="Images/DealHive.png" Width="120" Height="120"/>
         </StackPanel>
 
         <!-- Форма -->
@@ -33,10 +49,14 @@
 
             <!-- First Name -->
             <Grid Margin="0,5" Height="35">
-                <TextBox x:Name="FirstNameBox" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="13*"/>
+                    <ColumnDefinition Width="36*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="FirstNameBox" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged" Grid.ColumnSpan="2"/>
                 <TextBlock x:Name="FirstNamePlaceholder" Text="Ім'я*" 
                            Foreground="Gray" Margin="5,0,0,0" VerticalAlignment="Center"
-                           IsHitTestVisible="False" FontFamily="Sans Serif Collection"/>
+                           IsHitTestVisible="False" FontFamily="Sans Serif Collection" Grid.ColumnSpan="2"/>
             </Grid>
             <TextBlock x:Name="FirstNameError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
@@ -49,16 +69,55 @@
             </Grid>
             <TextBlock x:Name="LastNameError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
+
+
             <Grid Margin="0,5">
-                <PasswordBox x:Name="PasswordBox" Height="35" Margin="0,0,40,0" FontFamily="Sans Serif Collection" />
-                <Button Content="👁" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Click="TogglePasswordVisibility"/>
+                <!-- Закритий пароль -->
+                <PasswordBox x:Name="PasswordBox" Height="35" Margin="0,0,40,0" 
+                 FontFamily="Sans Serif Collection" 
+                             FontSize="12"
+                 Visibility="Visible"
+                 PasswordChanged="PasswordBox_PasswordChanged"/>
+
+                <!-- Відкритий пароль -->
+                <TextBox x:Name="VisiblePasswordBox" Height="35" Margin="0,0,40,0" 
+             FontFamily="Sans Serif Collection" 
+                         FontSize="12"
+             Visibility="Collapsed" 
+             TextChanged="VisiblePasswordBox_TextChanged"/>
+
+                <!-- Кнопка перегляду -->
+                <Button Content="👁" Width="30" Height="30" VerticalAlignment="Center" 
+            HorizontalAlignment="Right" Margin="0,0,5,0" 
+            Click="TogglePasswordVisibility"/>
             </Grid>
+
+
+
+
             <TextBlock x:Name="PasswordError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
             <Grid Margin="0,5">
-                <PasswordBox x:Name="ConfirmPasswordBox" Height="35" Margin="0,0,40,0" FontFamily="Sans Serif Collection" />
-                <Button Content="👁" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,5,0" Click="ToggleConfirmPasswordVisibility"/>
+                <!-- Закритий пароль -->
+                <PasswordBox x:Name="ConfirmPasswordBox" Height="35" Margin="0,0,40,0" 
+                 FontFamily="Sans Serif Collection" 
+                             FontSize="12"
+                 Visibility="Visible"
+                 PasswordChanged="ConfirmPasswordBox_PasswordChanged"/>
+
+                <!-- Відкритий пароль -->
+                <TextBox x:Name="VisibleConfirmPasswordBox" Height="35" Margin="0,0,40,0" 
+             FontFamily="Sans Serif Collection" 
+                         FontSize="12"
+             Visibility="Collapsed"
+             TextChanged="VisibleConfirmPasswordBox_TextChanged"/>
+
+                <!-- Кнопка перегляду -->
+                <Button Content="👁" Width="30" Height="30" VerticalAlignment="Center" 
+            HorizontalAlignment="Right" Margin="0,0,5,0" 
+            Click="ToggleConfirmPasswordVisibility"/>
             </Grid>
+
             <TextBlock x:Name="ConfirmPasswordError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
             <!-- Phone -->
@@ -79,7 +138,7 @@
             </Grid>
             <TextBlock x:Name="BalanceError" Foreground="Red" FontSize="12" Visibility="Collapsed"/>
 
-            <Button Content="Продовжити" Background="#FF6600" Foreground="White" FontSize="16" FontWeight="Bold" Height="40" Margin="0,20,0,0" Click="RegisterButton_Click" FontFamily="Sans Serif Collection"/>
+            <Button Content="Продовжити" Background="#FF6600" Foreground="White" FontSize="16" FontWeight="Bold" Height="40" Margin="0,20,0,0" Click="RegisterButton_Click" FontFamily="Sans Serif Collection" BorderBrush="#FFFF6600"/>
         </StackPanel>
 
         <!-- Нижній текст -->

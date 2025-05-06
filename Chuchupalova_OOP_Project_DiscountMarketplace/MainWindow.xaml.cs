@@ -31,6 +31,12 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            JsonStorage.LoadUsersFromJson();
+            JsonStorage.LoadCouponsFromJson();
+
+            JsonStorage.LoadReviewsFromJson(RegisteredUser.GetAllUsers());
+            JsonStorage.LoadOrdersFromJson(RegisteredUser.GetAllUsers(), Coupon.GetAllCoupons());
+
             guest = new Guest(1, "guest@dealhive.com", "Гість", "Системи", "+38(000)-0000000");
             foreach (CouponCategory cat in Enum.GetValues(typeof(CouponCategory)))
                 guest.AvailableCategories.Add(cat);

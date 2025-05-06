@@ -52,8 +52,8 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             }
 
             // Відгуки
-            var reviews = Review.GetReviewsByCouponId(coupon.Id);
-            ReviewList.ItemsSource = reviews;
+            ReviewList.ItemsSource = null;
+            ReviewList.ItemsSource = Review.GetReviewsByCouponId(coupon.Id);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

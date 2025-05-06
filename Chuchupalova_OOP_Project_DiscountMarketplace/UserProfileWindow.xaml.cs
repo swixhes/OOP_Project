@@ -26,9 +26,11 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             DataContext = user;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+      
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-
+           
+            this.Close();
         }
     }
 }

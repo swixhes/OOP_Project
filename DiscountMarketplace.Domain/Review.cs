@@ -17,6 +17,8 @@ public class Review
             allReviews.Add(review);
     }
 
+    public static List<Review> GetAllReviews() => new List<Review>(allReviews);
+
     public static List<Review> GetReviewsByCouponId(int couponId) =>
         allReviews.Where(r => r.CouponId == couponId).ToList();
 
@@ -40,10 +42,20 @@ public class Review
 
         AddReview(this);
     }
+    public static void SetNextId(int id)
+    {
+        if (id > nextId)
+            nextId = id;
+    }
 
     public static double GetAverageRating(int couponId)
     {
         var reviews = GetReviewsByCouponId(couponId);
         return reviews.Any() ? reviews.Average(r => r.Rating) : 0;
+
+    }
+    public static void ClearAllReviews()
+    {
+        allReviews.Clear();
     }
 }

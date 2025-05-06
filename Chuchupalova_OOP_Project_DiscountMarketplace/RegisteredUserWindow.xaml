@@ -10,7 +10,7 @@
     <DockPanel>
         <!-- Верхня панель -->
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="#F0F0F0" Height="80">
-            <Image Source="DealHive2.png" Width="80" Height="80" Margin="20,0"/>
+            <Image Source="Images/DealHive2.png" Width="80" Height="80" Margin="20,0"/>
 
             <ComboBox x:Name="CategoryFilter" Width="200" Margin="0,10" Height="35" SelectionChanged="CategoryFilter_SelectionChanged" Background="{x:Null}">
                 <ComboBoxItem Content="Усі категорії" IsSelected="True"/>
@@ -29,7 +29,7 @@
 
 
             <Button Width="40" Height="35" Margin="0,10,50,10" Click="SearchButton_Click" BorderBrush="{x:Null}" Background="DarkOrange">
-                <Image Source="search_icon.png" Width="15" Height="15" />
+                <Image Source="Images/search_icon.png" Width="15" Height="15" />
             </Button>
 
 

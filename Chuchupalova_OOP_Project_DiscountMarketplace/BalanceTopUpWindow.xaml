@@ -1,0 +1,32 @@
+﻿<Window x:Class="Chuchupalova_OOP_Project_DiscountMarketplace.BalanceTopUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
+        mc:Ignorable="d"
+        Title="Поповнення рахунку" Height="320" Width="400" WindowStartupLocation="CenterScreen">
+    
+    <Grid Background="WhiteSmoke" Margin="20">
+        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
+            <Button Content="✖" HorizontalAlignment="Right" Click="CloseButton_Click" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
+            <TextBlock Text="Поповнення рахунку" FontSize="18" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Поточний баланс:"/>
+            <TextBlock x:Name="CurrentBalanceText" FontWeight="SemiBold" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Сума поповнення:"/>
+            <TextBox x:Name="AmountBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Спосіб оплати:"/>
+            <ComboBox x:Name="PaymentMethodBox" Margin="0,0,0,20">
+                <ComboBoxItem Content="Банківська карта"/>
+                <ComboBoxItem Content="Google Pay"/>
+                <ComboBoxItem Content="Apple Pay"/>
+            </ComboBox>
+
+            <Button Content="Поповнити" Click="TopUp_Click" Background="DarkOrange" Foreground="White" FontWeight="Bold"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -49,13 +49,61 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         private void TogglePasswordVisibility(object sender, RoutedEventArgs e)
         {
             isPasswordVisible = !isPasswordVisible;
-            PasswordBox.Visibility = isPasswordVisible ? Visibility.Collapsed : Visibility.Visible;
+
+            if (isPasswordVisible)
+            {
+                VisiblePasswordBox.Text = PasswordBox.Password;
+                PasswordBox.Visibility = Visibility.Collapsed;
+                VisiblePasswordBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                PasswordBox.Password = VisiblePasswordBox.Text;
+                PasswordBox.Visibility = Visibility.Visible;
+                VisiblePasswordBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!isPasswordVisible)
+                VisiblePasswordBox.Text = PasswordBox.Password;
+        }
+
+        private void VisiblePasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isPasswordVisible)
+                PasswordBox.Password = VisiblePasswordBox.Text;
         }
 
         private void ToggleConfirmPasswordVisibility(object sender, RoutedEventArgs e)
         {
             isConfirmPasswordVisible = !isConfirmPasswordVisible;
-            ConfirmPasswordBox.Visibility = isConfirmPasswordVisible ? Visibility.Collapsed : Visibility.Visible;
+
+            if (isConfirmPasswordVisible)
+            {
+                VisibleConfirmPasswordBox.Text = ConfirmPasswordBox.Password;
+                ConfirmPasswordBox.Visibility = Visibility.Collapsed;
+                VisibleConfirmPasswordBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                ConfirmPasswordBox.Password = VisibleConfirmPasswordBox.Text;
+                ConfirmPasswordBox.Visibility = Visibility.Visible;
+                VisibleConfirmPasswordBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ConfirmPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!isConfirmPasswordVisible)
+                VisibleConfirmPasswordBox.Text = ConfirmPasswordBox.Password;
+        }
+
+        private void VisibleConfirmPasswordBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isConfirmPasswordVisible)
+                ConfirmPasswordBox.Password = VisibleConfirmPasswordBox.Text;
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -164,8 +212,9 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void LoginLink_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            var loginWindow = new LoginPage();
+            this.Close();
+            loginWindow.Show();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -180,6 +229,13 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                 PhonePlaceholder.Visibility = string.IsNullOrEmpty(PhoneBox.Text) ? Visibility.Visible : Visibility.Collapsed;
             else if (sender == BalanceBox)
                 BalancePlaceholder.Visibility = string.IsNullOrEmpty(BalanceBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWindow = new LoginPage();
+            this.Close();
+            loginWindow.Show();
         }
     }
 }

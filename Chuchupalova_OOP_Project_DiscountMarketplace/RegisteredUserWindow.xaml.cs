@@ -31,13 +31,21 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         }
 
         private void RegisteredUserWindow_Loaded(object sender, RoutedEventArgs e)
-            {
-                Coupon.InitializeTestCoupons();
-                LoadCoupons();
-            }
+        {
+            JsonStorage.LoadCouponsFromJson();
+            JsonStorage.LoadReviewsFromJson(RegisteredUser.GetAllUsers());
+            JsonStorage.LoadOrdersFromJson(RegisteredUser.GetAllUsers(), Coupon.GetAllCoupons());
+       
+            //Coupon.InitializeTestCoupons();
+            LoadCoupons();
+         
+            //JsonStorage.LoadOrdersFromJson(RegisteredUser.GetAllUsers(), Coupon.GetAllCoupons());
 
-            private void LoadCoupons(CouponCategory? category = null)
+        }
+
+        private void LoadCoupons(CouponCategory? category = null)
             {
+
                 if (CouponList == null) return;
 
                 string searchText = SearchBox?.Text?.ToLower() ?? "";
@@ -152,8 +160,9 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
             private void CartButton_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("Кошик відкрито (заглушка)"); // Реалізувати відображення вікна кошика
-            }
+            var cartWindow = new CartWindow(user);
+            cartWindow.Show();
+        }
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
@@ -163,13 +172,16 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void MyCoupons_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("Ваші купони (заглушка)");
+            var myCouponsWindow = new MyCouponsWindow(user);
+            myCouponsWindow.ShowDialog();
+            
             }
 
             private void TopUp_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("Поповнення рахунку (заглушка)");
-            }
+            var window = new BalanceTopUpWindow(user); // currentUser — авторизований користувач
+            window.ShowDialog();
+        }
 
             private void Logout_Click(object sender, RoutedEventArgs e)
             {

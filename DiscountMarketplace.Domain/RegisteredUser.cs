@@ -35,7 +35,7 @@ namespace DiscountMarketplace.Domain
             }
         }
 
-        public event EventHandler<CouponEventArgs> CouponPurchased;
+        //public event EventHandler<CouponEventArgs> CouponPurchased;
         public event EventHandler<CouponEventArgs> CouponReturned;
         public event EventHandler<string> Notification;
         public event PurchaseHandler OnSuccessfulPurchase;
@@ -51,11 +51,12 @@ namespace DiscountMarketplace.Domain
         {
             ValidatePassword(password);
             Password = password;
-            Balance = balance;
+            Balance = initialBalance;
             allUsers.Add(this);
         }
+
         public RegisteredUser(int id, string email, string firstName, string lastName, string phoneNumber, string hashedPassword, double initialBalance, bool isHashed)
-    : base(id, email, firstName, lastName, phoneNumber)
+            : base(id, email, firstName, lastName, phoneNumber)
         {
             if (isHashed)
                 password = hashedPassword;
@@ -73,31 +74,31 @@ namespace DiscountMarketplace.Domain
             return Email == email && this.password == PasswordHasher.Hash(password);
         }
 
-        public bool PurchaseCoupon(Coupon coupon)
-        {
-            if (coupon == null)
-                throw new ArgumentNullException(nameof(coupon));
+        //public bool PurchaseCoupon(Coupon coupon)
+        //{
+        //    if (coupon == null)
+        //        throw new ArgumentNullException(nameof(coupon));
 
-            if (!coupon.IsValid())
-            {
-                Notification?.Invoke(this, "Купон недійсний або термін дії закінчився.");
-                return false;
-            }
+        //    if (!coupon.IsValid())
+        //    {
+        //        Notification?.Invoke(this, "Купон недійсний або термін дії закінчився.");
+        //        return false;
+        //    }
 
-            if (Balance < coupon.Price)
-            {
-                Notification?.Invoke(this, "Недостатньо коштів на балансі.");
-                return false;
-            }
+        //    if (Balance < coupon.Price)
+        //    {
+        //        Notification?.Invoke(this, "Недостатньо коштів на балансі.");
+        //        return false;
+        //    }
 
-            Balance -= coupon.Price;
-            var order = new Order(this, coupon, DateTime.Now);
-            PurchasedCoupons.Add(order);
-            coupon.MarkAsUsed();
-            CouponPurchased?.Invoke(this, new CouponEventArgs(coupon));
-            OnSuccessfulPurchase?.Invoke($"Купон {coupon.Name} успішно придбано.");
-            return true;
-        }
+        //    Balance -= coupon.Price;
+        //    var order = new Order(this, coupon, DateTime.Now);
+        //    PurchasedCoupons.Add(order);
+        //    coupon.MarkAsUsed();
+        //    CouponPurchased?.Invoke(this, new CouponEventArgs(coupon));
+        //    OnSuccessfulPurchase?.Invoke($"Купон {coupon.Name} успішно придбано.");
+        //    return true;
+        //}
 
         public List<Order> ViewPurchasedCoupons()
         {
@@ -113,9 +114,15 @@ namespace DiscountMarketplace.Domain
                 return false;
             }
 
-            if (!order.Coupon.IsValid())
+            //if (!order.Coupon.IsValid())
+            //{
+            //    Notification?.Invoke(this, "Купон вже використано і не може бути повернутий.");
+            //    return false;
+            //}
+
+            if ((DateTime.Now - order.PurchaseDate).TotalHours > 1)
             {
-                Notification?.Invoke(this, "Купон вже використано і не може бути повернутий.");
+                Notification?.Invoke(this, "Час на повернення купону вичерпано (більше 1 години).");
                 return false;
             }
 
@@ -123,6 +130,7 @@ namespace DiscountMarketplace.Domain
             PurchasedCoupons.Remove(order);
             CouponReturned?.Invoke(this, new CouponEventArgs(order.Coupon));
             Notification?.Invoke(this, $"Купон {order.Coupon.Name} успішно повернено.");
+            order.Coupon.RestoreUsage();
             return true;
         }
 
