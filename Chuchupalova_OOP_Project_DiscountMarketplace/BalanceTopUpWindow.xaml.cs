@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Chuchupalova_OOP_Project_DiscountMarketplace
 {
@@ -32,22 +33,43 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void TopUp_Click(object sender, RoutedEventArgs e)
         {
-            if (!double.TryParse(AmountBox.Text, out double amount) || amount <= 0)
+            if (!double.TryParse(AmountBox.Text, out double amount))
             {
-                MessageBox.Show("Введіть коректну суму для поповнення.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Введіть коректну числову суму.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                AmountBox.Clear();
+                return;
+            }
+
+            if (!user.TopUpBalance(amount))
+            {
+                string msg = amount <= 0
+                    ? "Сума має бути більшою за 0."
+                    : "Сума поповнення не може перевищувати 5000 грн.";
+                MessageBox.Show(msg, "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                AmountBox.Clear();
                 return;
             }
 
             var method = (PaymentMethodBox.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Банківська карта";
 
-            user.Balance += amount;
             JsonStorage.SaveUsersToJson(RegisteredUser.GetAllUsers());
 
-            MessageBox.Show($"Рахунок поповнено на {amount:0.00} грн через {method}.", "Успішно", MessageBoxButton.OK, MessageBoxImage.Information);
-            CurrentBalanceText.Text = $"{user.Balance:0.00} грн";
+            SuccessToast.Text = $"Рахунок поповнено на {amount:0.00} грн через {method}.";
+            SuccessBorder.Visibility = Visibility.Visible;
 
-            this.Close();
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            timer.Tick += (s, args) =>
+            {
+                SuccessBorder.Visibility = Visibility.Collapsed;
+                timer.Stop();
+            };
+            timer.Start();
+
+            CurrentBalanceText.Text = $"{user.Balance:0.00} грн";
+            AmountBox.Clear();
         }
+
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {

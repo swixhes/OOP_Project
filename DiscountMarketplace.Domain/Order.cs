@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace DiscountMarketplace.Domain
 {
+    public delegate void PurchaseHandler(string message);
+
     public class Order
     {
         private static int nextId = 1;
@@ -18,6 +20,8 @@ namespace DiscountMarketplace.Domain
         public DateTime PurchaseDate { get; set; }
 
         public Order() { }
+
+        public static event PurchaseHandler? PurchaseConfirmed;
 
         public Order(RegisteredUser user, Coupon coupon, DateTime purchaseDate)
         {
@@ -42,20 +46,19 @@ namespace DiscountMarketplace.Domain
                 JsonStorage.SaveOrdersToJson(RegisteredUser.GetAllUsers().SelectMany(u => u.ViewPurchasedCoupons()).ToList());
                 JsonStorage.SaveUsersToJson(RegisteredUser.GetAllUsers());
                 JsonStorage.SaveCouponsToJson(Coupon.GetAllCoupons());
+
+                PurchaseConfirmed?.Invoke($"Купон(и) успішно придбано!");
+
                 return true;
             }
             return false;
         }
-
-
-        // CartManager logic
         public static void AddToCart(RegisteredUser user, Coupon coupon)
         {
             var actualCoupon = Coupon.GetAllCoupons().FirstOrDefault(c => c.Id == coupon.Id);
             if (actualCoupon == null)
                 throw new ArgumentException("Купон не знайдено.");
 
-            // Додана перевірка на дійсність
             if (!actualCoupon.IsValid())
                 throw new InvalidOperationException($"Купон \"{actualCoupon.Name}\" більше не дійсний і не може бути доданий до кошика.");
 
@@ -68,8 +71,6 @@ namespace DiscountMarketplace.Domain
             else
                 cart[user].Add(new CartItemModel { Coupon = actualCoupon, Quantity = 1 });
         }
-
-
         public static List<CartItemModel> GetCart(RegisteredUser user)
         {
             return cart.ContainsKey(user) ? new List<CartItemModel>(cart[user]) : new List<CartItemModel>();
@@ -136,50 +137,14 @@ namespace DiscountMarketplace.Domain
                         throw new ArgumentException($"Не вдалося купити купон: {item.Coupon.Name}");
                 }
             }
-
-
             user.Balance -= total;
             ClearCart(user);
-
-
-            
         }
-        //public static void SaveOrders(string filePath)
-        //{
-        //    var allOrders = RegisteredUser.GetAllUsers().SelectMany(u => u.PurchasedCoupons).ToList();
-        //    var json = JsonSerializer.Serialize(allOrders, new JsonSerializerOptions
-        //    {
-        //        WriteIndented = true,
-        //        ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
-        //    });
-        //    File.WriteAllText(filePath, json);
-        //}
-
-        //public static void LoadOrders(string filePath)
-        //{
-        //    if (!File.Exists(filePath)) return;
-
-        //    var json = File.ReadAllText(filePath);
-        //    var orders = JsonSerializer.Deserialize<List<Order>>(json, new JsonSerializerOptions
-        //    {
-        //        ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
-        //    });
-
-        //    if (orders != null)
-        //    {
-        //        foreach (var order in orders)
-        //        {
-        //            order.User?.PurchasedCoupons.Add(order);
-        //        }
-        //    }
-        //}
     }
-
     public class CartItemModel
     {
         public Coupon Coupon { get; set; }
         public int Quantity { get; set; }
-
         public string Name => Coupon.Name;
         public string ImagePath => Coupon.ImagePath;
         public string PriceText => $"{Coupon.Price * Quantity} грн";

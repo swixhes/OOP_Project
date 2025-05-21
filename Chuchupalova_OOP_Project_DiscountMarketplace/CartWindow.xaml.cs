@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Chuchupalova_OOP_Project_DiscountMarketplace
 {
@@ -69,8 +70,21 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         {
             try
             {
+                Order.PurchaseConfirmed += msg =>
+                {
+                    OrderSuccessToast.Text = msg;
+                    OrderSuccessBorder.Visibility = Visibility.Visible;
+
+                    var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+                    timer.Tick += (s, args) =>
+                    {
+                        OrderSuccessBorder.Visibility = Visibility.Collapsed;
+                        timer.Stop();
+                    };
+                    timer.Start();
+                };
+
                 Order.PlaceOrder(user);
-                MessageBox.Show("Замовлення успішно оформлено!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -86,5 +100,12 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         {
             this.Close();
         }
+
+        private void HelpText_Click(object sender, MouseButtonEventArgs e)
+        {
+            var helpWindow = new HelpWindow(); // створимо це вікно окремо
+            helpWindow.ShowDialog();
+        }
+
     }
 }

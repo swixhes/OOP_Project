@@ -100,7 +100,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                     Tag = coupon,
                     Margin = new Thickness(0, 5, 0, 0),
                     Background = Brushes.DarkOrange,
-                    BorderBrush = Brushes.DarkOrange,
+                    BorderThickness = new Thickness(0),
                     Foreground = Brushes.White
                 };
                 btn.Click += ViewDetails_Click;
@@ -175,5 +175,16 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         {
             LoadCoupons();
         }
+        private void OpenTopBuyers_Click(object sender, RoutedEventArgs e)
+        {
+            var topBuyersWindow = new TopBuyersWindow();
+            topBuyersWindow.ShowDialog();
+        }
+        private void HelpText_Click(object sender, MouseButtonEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.ShowDialog();
+        }
+
     }
 }

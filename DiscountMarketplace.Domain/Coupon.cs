@@ -18,24 +18,56 @@ namespace DiscountMarketplace.Domain
 
         public static List<Coupon> GetAllCoupons() => allCoupons;
 
-        public int Id { get; }
-        public string Name { get; }
-        public CouponCategory Category { get; }
-        public DateTime ExpirationDate { get; }
-        public double Discount { get; }
-        public int UsageLimit { get; private set; }
-        public string Description { get; }
-        public int PurchaseCount { get; private set; } = 0; // кількість покупок
+        public int Id { get;}
+        private string name;
+        public string Name
+        {
+            get => name;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException("Назва не може бути порожньою.");
+                name = value;
+            }
+        }
+        public CouponCategory Category { get; set; }
+        private DateTime expirationDate;
+        public DateTime ExpirationDate
+        {
+            get => expirationDate;
+            set => expirationDate = value;
+        }
+        private double discount;
+        public double Discount
+        {
+            get => discount;
+            set
+            {
+                if (value < 0 || value > 100)
+                    throw new ArgumentException("Знижка має бути від 0 до 100%.");
+                discount = value;
+            }
+        }
+        private int usageLimit;
+        public int UsageLimit
+        {
+            get => usageLimit;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("Ліміт використань не може бути від’ємним.");
+                usageLimit = value;
+            }
+        }
+        public string Description { get; set; }
+        public int PurchaseCount { get; private set; } = 0;
 
         public double Price => 100.0 * (1 - Discount / 100.0);
-        public string ImagePath { get; }
+        public string ImagePath { get; set; }
 
         public Coupon(int id, string name, CouponCategory category, DateTime expirationDate, double discount, int usageLimit, string imagePath, string description)
         {
             if (id <= 0) throw new ArgumentException("ID має бути більше 0.");
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("Назва не може бути порожньою.");
-            if (discount < 0 || discount > 100) throw new ArgumentException("Знижка має бути від 0 до 100%.");
-            if (usageLimit < 0) throw new ArgumentException("Ліміт використань не може бути від’ємним.");
 
             Id = id;
             Name = name;
@@ -56,7 +88,7 @@ namespace DiscountMarketplace.Domain
             if (IsValid())
             {
                 UsageLimit--;
-                PurchaseCount++; // збільшуємо лічильник покупок
+                PurchaseCount++;
                 JsonStorage.SaveCouponsToJson(Coupon.GetAllCoupons());
                 return true;
             }
@@ -72,7 +104,7 @@ namespace DiscountMarketplace.Domain
         {
             if (allCoupons.Count > 0) return;
            
-            new Coupon(1, "Знижка на піцу", CouponCategory.Food, DateTime.Now.AddDays(10), 20, 100, "Images/food_coupon.jpg", "Соковита піца з сиром та ковбаскою – зі знижкою 20%!");
+            new Coupon(1, "Знижка на піцу", CouponCategory.Food, DateTime.Now.AddDays(10), 20, 5, "Images/food_coupon.jpg", "Соковита піца з сиром та ковбаскою – зі знижкою 20%!");
             new Coupon(2, "Спа-процедури", CouponCategory.Beauty, DateTime.Now.AddDays(15), 30, 1, "Images/beauty_coupon.jpg", "Розслабся у найкращому СПА-комплексі твого міста.");
             new Coupon(3, "Тур до Карпат", CouponCategory.Travel, DateTime.Now.AddDays(-1), 25, 30, "Images/travel_coupon.jpg", "Насолодись горами, свіжим повітрям та пригодами!");
             new Coupon(4, "Абонемент в спортзал", CouponCategory.Sport, DateTime.Now.AddDays(5), 40, 20, "Images/sport_coupon.jpg", "Зроби перший крок до здорового життя вже сьогодні!");

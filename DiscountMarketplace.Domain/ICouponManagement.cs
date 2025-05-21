@@ -8,9 +8,7 @@ namespace DiscountMarketplace.Domain
 {
     public interface ICouponManagement
     {
-        bool CreateDiscount(int couponId, double discountPercentage);
-        bool EditCoupon(int couponId, Coupon updatedCoupon);
-        bool DeleteCoupon(int couponId);
+        bool CreateOrEditCoupon(Coupon updatedCoupon);
     }
 
 }

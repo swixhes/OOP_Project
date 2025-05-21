@@ -21,7 +21,7 @@
             Margin="0" Padding="5"
             HorizontalAlignment="Left" VerticalAlignment="Top"
             Background="#ff8c00" Foreground="White"
-            FontWeight="Bold" Click="BackButton_Click"/>
+            FontWeight="Bold" Click="BackButton_Click" BorderBrush="{x:Null}"/>
 
             <Grid Grid.Row="0" Margin="0,40,0,11">
                 <Grid.ColumnDefinitions>
@@ -49,7 +49,7 @@
                     <TextBlock Text="Опис купона" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
                     <TextBlock x:Name="CouponDescription" FontSize="14" TextWrapping="Wrap"/>
 
-                    <Button Content="Купити" Width="120" Height="40" Background="DarkOrange" Foreground="White" FontWeight="Bold" Margin="0,20,0,10"/>
+                    <Button Content="Купити" Width="120" Height="40" Background="DarkOrange" Foreground="White" FontWeight="Bold" Margin="0,20,0,10" BorderBrush="{x:Null}" Click="Button_Click"/>
                 </StackPanel>
             </Grid>
 

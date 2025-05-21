@@ -15,15 +15,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="15" Grid.Row="0">
+            
             <TextBlock Text="Мої купони"
+                       
                    FontSize="28"
                    FontWeight="Bold"
                    Foreground="#2E3A59"
                    Margin="0 0 0 20"/>
+            <Border x:Name="ReturnSuccessBorder" Margin="15,5" Padding="7" 
+ Background="#F0FFF0" BorderBrush="Green" BorderThickness="1"
+ CornerRadius="5" Visibility="Collapsed" Grid.Row="2">
+                <TextBlock x:Name="ReturnSuccessToast"
+        Text="Замовлення успішно оформлено!"
+        Foreground="DarkGreen" FontWeight="Bold"
+        FontSize="12" TextAlignment="Center" Margin="0,5,0,5"/>
+            </Border>
             <Button Content="✖" HorizontalAlignment="Right" Click="CloseButton_Click"
   Background="Transparent" BorderThickness="0" FontSize="16" Foreground="Gray" Margin="0 0 0 20"/>
         </DockPanel>
-
+        
         <TextBlock x:Name="NoCouponsMessage"
                Text="У вас немає куплених купонів."
                FontSize="16"

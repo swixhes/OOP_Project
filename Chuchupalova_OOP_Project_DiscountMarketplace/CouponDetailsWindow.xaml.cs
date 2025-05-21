@@ -63,5 +63,10 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             this.Close();
             mainWindow.Show();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Увійдіть в акаунт, щоб купити купон.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

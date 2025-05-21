@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.CartWindow">
+    <Position X="3.75" Y="4.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AACAABAAAQAgAAAAAAAAAAAAAAIAAAAAAAAACAAAIQE=</HashCode>
+      <FileName>CartWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.BalanceTopUpWindow">
+    <Position X="14" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>BalanceTopUpWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.CouponDetailsForRUserWindow">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>CABAAgAAAgAAAAAAAAAAAAAACAAAAAAAAAAIACAAAQI=</HashCode>
+      <FileName>CouponDetailsForRUserWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.CouponDetailsWindow">
+    <Position X="9.75" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>CouponDetailsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.LoginPage">
+    <Position X="4" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAwAAgAAAAAAAAAAAAAgAAAAAAAAAACCAKAAAAA=</HashCode>
+      <FileName>LoginPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.MainWindow">
+    <Position X="0.75" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AgBAAAACAAAAAAAAAAgAAAAgAAAAAAABAADACAAAAAE=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.MyCouponsWindow">
+    <Position X="10.75" Y="5.25" Width="2.5" />
+    <NestedTypes>
+      <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.MyCouponsWindow.CouponViewModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MyCouponsWindow.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAIAAAACAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>MyCouponsWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.RegisteredUserWindow">
+    <Position X="10.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>CgBAAAAKAAAAAAAAAAggAAAgAACAAACBAAAAIAAAAQE=</HashCode>
+      <FileName>RegisteredUserWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.RegistrationWindow">
+    <Position X="7.25" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAwAAgEAAAAAAAQAAAEogAEAAAACAAAAAICAgQA=</HashCode>
+      <FileName>RegistrationWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.UserProfileWindow">
+    <Position X="14" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserProfileWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.TopBuyersWindow">
+    <Position X="6.5" Y="8.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>TopBuyersWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.ACouponEditorWindow">
+    <Position X="0.75" Y="8.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAAgAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>ACouponEditorWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.AdminLoginWindow">
+    <Position X="3.75" Y="8" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAACABAAAAAA=</HashCode>
+      <FileName>AdminLoginWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.AdminWindow">
+    <Position X="13.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAhAQAAAAAAAAAAAACACAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>AdminWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.HelpWindow">
+    <Position X="12.5" Y="8.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>HelpWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Chuchupalova_OOP_Project_DiscountMarketplace.SuccessfulRegistration">
+    <Position X="7.75" Y="5.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAA=</HashCode>
+      <FileName>SuccessfulRegistration.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9.22" />
+</ClassDiagram>

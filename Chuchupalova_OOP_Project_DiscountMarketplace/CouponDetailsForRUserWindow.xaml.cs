@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Chuchupalova_OOP_Project_DiscountMarketplace
 {
@@ -71,16 +72,28 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            new RegisteredUserWindow(user).Show();
+            var registeredUserWindow = new RegisteredUserWindow(user);
             this.Close();
+            registeredUserWindow.Show();
         }
-
         private void BuyButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 Order.AddToCart(user, coupon);
-                MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Купон додано до кошика.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                SuccessToast.Text = "Купон додано до кошика";
+                SuccessBorder.Visibility = Visibility.Visible;
+
+                var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+                timer.Tick += (s, args) =>
+                {
+                    SuccessBorder.Visibility = Visibility.Collapsed;
+                    timer.Stop();
+                };
+                timer.Start();
+
+
             }
             catch (ArgumentException ex)
             {
@@ -123,7 +136,18 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             }
 
             new Review(coupon.Id, user, rating, comment);
-            MessageBox.Show("Відгук надіслано.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            //MessageBox.Show("Відгук надіслано.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+            ReviewSuccessToast.Text = "Відгук надіслано!";
+            ReviewSuccessBorder.Visibility = Visibility.Visible;
+
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            timer.Tick += (s, args) =>
+            {
+                ReviewSuccessBorder.Visibility = Visibility.Collapsed;
+                timer.Stop();
+            };
+            timer.Start();
+
             ReviewBox.Clear();
             RatingBox.SelectedIndex = -1;
             LoadReviews();
@@ -142,7 +166,17 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
             if (user.DeleteReview(review.Id))
             {
-                MessageBox.Show("Відгук видалено.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                //MessageBox.Show("Відгук видалено.", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
+                ReviewSuccessToast.Text = "Відгук видалено!";
+                ReviewSuccessBorder.Visibility = Visibility.Visible;
+
+                var timer2 = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+                timer2.Tick += (s, args) =>
+                {
+                    ReviewSuccessBorder.Visibility = Visibility.Collapsed;
+                    timer2.Stop();
+                };
+                timer2.Start();
                 JsonStorage.SaveReviewsToJson(Review.GetAllReviews());
                 LoadReviews();
             }

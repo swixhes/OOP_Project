@@ -37,7 +37,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
             if (user != null && user.Login(email, password))
             {
-                MessageBox.Show($"Вітаємо, {user.FirstName}!", "Успішний вхід", MessageBoxButton.OK, MessageBoxImage.Information);  
+                //MessageBox.Show($"Вітаємо, {user.FirstName}!", "Успішний вхід", MessageBoxButton.OK, MessageBoxImage.Information);  
                 var userWindow = new RegisteredUserWindow(user);
                 this.Close();
                 userWindow.Show();
@@ -63,14 +63,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                 EmailPlaceholder.Visibility = string.IsNullOrEmpty(EmailTextBox.Text) ? Visibility.Visible : Visibility.Collapsed;
                 ErrorTextBlock.Visibility = Visibility.Collapsed;
             }
-            //else if (sender == FirstNameBox)
-            //    FirstNamePlaceholder.Visibility = string.IsNullOrEmpty(FirstNameBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-            //else if (sender == LastNameBox)
-            //    LastNamePlaceholder.Visibility = string.IsNullOrEmpty(LastNameBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-            //else if (sender == PhoneBox)
-            //    PhonePlaceholder.Visibility = string.IsNullOrEmpty(PhoneBox.Text) ? Visibility.Visible : Visibility.Collapsed;
-            //else if (sender == BalanceBox)
-            //    BalancePlaceholder.Visibility = string.IsNullOrEmpty(BalanceBox.Text) ? Visibility.Visible : Visibility.Collapsed;
+            
         }
 
         private bool isPasswordVisible = false;
@@ -110,6 +103,12 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             var mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
+        }
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+            var loginWindow = new AdminLoginWindow();
+            this.Close();
+            loginWindow.ShowDialog();
         }
 
     }

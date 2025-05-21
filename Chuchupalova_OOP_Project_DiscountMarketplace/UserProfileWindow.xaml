@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
         mc:Ignorable="d"
-        Title="Профіль користувача" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+        Title="Профіль користувача" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Margin="10">
         <StackPanel>
             <DockPanel Margin="15" Grid.Row="0">

@@ -124,9 +124,8 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                 var newUser = RegisteredUser.GetAllUsers().FirstOrDefault(u => u.Email == email);
                 if (newUser != null)
                 {
-                    MessageBox.Show("Реєстрація успішна!", "Успіх", MessageBoxButton.OK, MessageBoxImage.Information);
-                    var userWindow = new RegisteredUserWindow(newUser);
-                    userWindow.Show();
+                    var successWindow = new SuccessfulRegistration(newUser);
+                    successWindow.Show();
                     this.Close();
                 }
                 else

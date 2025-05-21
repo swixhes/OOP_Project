@@ -9,9 +9,6 @@ namespace DiscountMarketplace.Domain
 {
     public class Admin : User, IReviewManagement, ICouponManagement
     {
-        private List<RegisteredUser> blockedUsers = new List<RegisteredUser>();
-
-        public IReadOnlyList<RegisteredUser> BlockedUsers => blockedUsers.AsReadOnly();
         public event EventHandler<string> Notification;
 
         private string password;
@@ -51,71 +48,31 @@ namespace DiscountMarketplace.Domain
             }
             return false;
         }
-
-        public bool BlockUser(int userId)
+        public bool CreateOrEditCoupon(Coupon updatedCoupon)
         {
-            var user = RegisteredUser.GetUserById(userId);
-            if (user != null && !blockedUsers.Contains(user))
-            {
-                blockedUsers.Add(user);
-                return true;
-            }
-            return false;
-        }
+            if (updatedCoupon == null)
+                throw new ArgumentNullException(nameof(updatedCoupon));
 
-        public bool UnblockUser(int userId)
-        {
-            var user = blockedUsers.FirstOrDefault(u => u.Id == userId);
-            if (user != null)
-            {
-                blockedUsers.Remove(user);
-                return true;
-            }
-            return false;
-        }
-
-        public bool CreateDiscount(int couponId, double discountPercentage)
-        {
-            var coupon = Coupon.GetAllCoupons().FirstOrDefault(c => c.Id == couponId);
-            if (coupon != null && coupon.IsValid() && discountPercentage >= 0 && discountPercentage <= 100)
-            {
-                var discountProperty = typeof(Coupon).GetProperty("Discount", BindingFlags.Public | BindingFlags.Instance);
-                if (discountProperty != null && discountProperty.CanWrite)
-                {
-                    discountProperty.SetValue(coupon, discountPercentage);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public bool EditCoupon(int couponId, Coupon updatedCoupon)
-        {
             var allField = typeof(Coupon).GetField("allCoupons", BindingFlags.NonPublic | BindingFlags.Static);
             if (allField?.GetValue(null) is List<Coupon> all)
             {
-                var existing = all.FirstOrDefault(c => c.Id == couponId);
+                var existing = all.FirstOrDefault(c => c.Id == updatedCoupon.Id);
                 if (existing != null)
                 {
-                    all.Remove(existing);
-                    all.Add(updatedCoupon);
-                    return true;
+                    existing.Name = updatedCoupon.Name;
+                    existing.Category = updatedCoupon.Category;
+                    existing.ExpirationDate = updatedCoupon.ExpirationDate;
+                    existing.Discount = updatedCoupon.Discount;
+                    existing.UsageLimit = updatedCoupon.UsageLimit;
+                    existing.Description = updatedCoupon.Description;
                 }
-            }
-            return false;
-        }
-
-        public bool DeleteCoupon(int couponId)
-        {
-            var allField = typeof(Coupon).GetField("allCoupons", BindingFlags.NonPublic | BindingFlags.Static);
-            if (allField?.GetValue(null) is List<Coupon> allCoupons)
-            {
-                var coupon = allCoupons.FirstOrDefault(c => c.Id == couponId);
-                if (coupon != null)
+                else
                 {
-                    allCoupons.Remove(coupon);
-                    return true;
+                    all.Add(updatedCoupon);
                 }
+
+                JsonStorage.SaveCouponsToJson(all);
+                return true;
             }
             return false;
         }

@@ -18,7 +18,7 @@
                     Margin="0" Padding="5"
                     HorizontalAlignment="Left" VerticalAlignment="Top"
                     Background="#ff8c00" Foreground="White"
-                    FontWeight="Bold" Click="BackButton_Click"/>
+                    FontWeight="Bold" Click="BackButton_Click" BorderBrush="{x:Null}"/>
 
             <Grid Grid.Row="0" Margin="0,40,0,11">
                 <Grid.ColumnDefinitions>
@@ -43,10 +43,27 @@
                     <TextBlock Text="Опис купона" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
                     <TextBlock x:Name="CouponDescription" FontSize="14" TextWrapping="Wrap"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                        <Button Content="Купити" Width="100" Height="40" Background="DarkOrange" Foreground="White" FontWeight="Bold" Margin="0,0,10,0" Click="BuyButton_Click"/>
-                        <Button Content="🛒 Кошик" Width="100" Height="40" Background="Gray" Foreground="White" FontWeight="Bold" Click="CartButton_Click"/>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20,0,0">
+                        <Button Content="Купити" 
+                                 Width="120" Height="40" 
+
+                                Background="DarkOrange" 
+                                Foreground="White" 
+                                FontWeight="Bold" 
+                                Click="BuyButton_Click" BorderBrush="{x:Null}"/>
                     </StackPanel>
+                    
+                    <Border x:Name="SuccessBorder" Margin="0,5" Padding="5" Background="#F0FFF0"
+BorderBrush="Green" Visibility="Collapsed" BorderThickness="1" CornerRadius="5">
+                        <StackPanel>
+                            <TextBlock x:Name="SuccessToast" Text="Купон додано до кошика"
+           Foreground="DarkSlateGray" FontWeight="SemiBold"
+           FontSize="12"
+           FontFamily="Segoe UI"
+           TextAlignment="Center" Margin="0,5,0,5"/>
+                        </StackPanel>
+                    </Border>
+                    
                 </StackPanel>
             </Grid>
 
@@ -63,7 +80,14 @@
                         <ComboBoxItem Content="5"/>
                     </ComboBox>
                     <Button Content="Надіслати" Width="100" Margin="20,0,0,0" Click="SubmitReview_Click"/>
+                    
                 </StackPanel>
+                <Border x:Name="ReviewSuccessBorder" Margin="0,10" Padding="5" Background="#F0FFF0"
+BorderBrush="Green" Visibility="Collapsed" BorderThickness="1" CornerRadius="5">
+                    <TextBlock x:Name="ReviewSuccessToast" Text="Відгук надіслано"
+       Foreground="DarkGreen" FontWeight="Bold"
+       FontSize="12" TextAlignment="Center"/>
+                </Border>
 
                 <TextBlock Text="Відгуки" FontWeight="Bold" FontSize="16" Margin="0,20,0,5"/>
                 <ItemsControl x:Name="ReviewList">

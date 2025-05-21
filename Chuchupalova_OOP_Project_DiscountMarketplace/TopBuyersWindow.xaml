@@ -1,0 +1,41 @@
+﻿<Window x:Class="Chuchupalova_OOP_Project_DiscountMarketplace.TopBuyersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
+        mc:Ignorable="d"
+        Title="Топ покупців"  Height="500" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Топ покупців за кількістю купонів"
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,10"
+                   HorizontalAlignment="Center"/>
+
+        <DataGrid x:Name="BuyersDataGrid"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1"
+                  CanUserAddRows="False"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ім'я" Binding="{Binding FirstName}" Width="*"/>
+                <DataGridTextColumn Header="Прізвище" Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="Кількість купонів" Binding="{Binding PurchasedCoupons.Count}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Content="Закрити"
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                Width="100" Height="30"
+                HorizontalAlignment="Center"
+                Background="DarkOrange" Foreground="White" BorderBrush="{x:Null}"
+                
+                Click="Close_Click"/>
+    </Grid>
+</Window>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Chuchupalova_OOP_Project_DiscountMarketplace
 {
@@ -35,10 +36,27 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
         public MyCouponsWindow(RegisteredUser user)
         {
             InitializeComponent();
-            
             currentUser = user ?? throw new ArgumentNullException(nameof(user));
+
+            currentUser.CouponReturned += (s, e) =>
+            {
+                ReturnSuccessToast.Text = $"Купон \"{e.Coupon.Name}\" повернено!";
+                ReturnSuccessBorder.Visibility = Visibility.Visible;
+
+                var timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+                timer.Tick += (sender, args) =>
+                {
+                    ReturnSuccessBorder.Visibility = Visibility.Collapsed;
+                    timer.Stop();
+                };
+                timer.Start();
+
+                LoadCoupons(); 
+            };
+
             LoadCoupons();
         }
+
 
         private void LoadCoupons()
         {
@@ -50,8 +68,8 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                     Name = o.Coupon.Name,
                     Price = o.Coupon.Price,
                     PurchaseDate = o.PurchaseDate,
-                    Status = o.Coupon.IsValid() ? "Доступний" : "Сплив термін",
-                    IsReturnable = o.Coupon.IsValid() && (DateTime.Now - o.PurchaseDate).TotalHours <= 1
+                    Status = (DateTime.Now - o.PurchaseDate).TotalHours <= 1 ? "Доступний" : "Сплив термін",
+                    IsReturnable = (DateTime.Now - o.PurchaseDate).TotalHours <= 1
                 }).ToList();
 
             CouponsDataGrid.ItemsSource = coupons;
@@ -63,16 +81,15 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             if (sender is Button button && int.TryParse(button.Tag.ToString(), out int couponId))
             {
                 bool success = currentUser.ReturnCoupon(couponId);
-                if (success)
+                if (!success)
                 {
-                    JsonStorage.SaveUsersToJson(RegisteredUser.GetAllUsers());
-                    JsonStorage.SaveOrdersToJson(RegisteredUser.GetAllUsers().SelectMany(u => u.ViewPurchasedCoupons()).ToList());
-                    MessageBox.Show("Купон повернено успішно.", "Інформація", MessageBoxButton.OK, MessageBoxImage.Information);
-                    LoadCoupons();
+                    MessageBox.Show("Не вдалося повернути купон.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Не вдалося повернути купон.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    JsonStorage.SaveUsersToJson(RegisteredUser.GetAllUsers());
+                    JsonStorage.SaveOrdersToJson(RegisteredUser.GetAllUsers().SelectMany(u => u.ViewPurchasedCoupons()).ToList());
+                   
                 }
             }
         }

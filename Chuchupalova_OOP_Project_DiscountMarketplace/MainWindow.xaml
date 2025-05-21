@@ -8,10 +8,12 @@
          Title="DEALHIVE - Купони для Гостей" Height="720" Width="1024" WindowStartupLocation="CenterScreen">
 
     <DockPanel>
-        <!-- Верхня панель -->
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="#F0F0F0" Height="80">
 
-            <Image Source="Images/DealHive2.png" Width="80" Height="80" Margin="50,0"/>
+        <!-- Верхня панель -->
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Background="#F0F0F0" Height="80" Cursor="">
+
+
+            <Image Source="Images/DealHive2.png" Width="80" Height="80" Margin="35,0"/>
             <ComboBox x:Name="CategoryFilter" Width="200" Margin="0,10" Height="35" SelectionChanged="CategoryFilter_SelectionChanged" Background="{x:Null}">
                 <ComboBoxItem Content="Усі категорії" IsSelected="True"/>
                 <ComboBoxItem Content="Beauty"/>
@@ -22,21 +24,27 @@
             </ComboBox>
 
 
-            
+
             <!-- Поле пошуку з підказками -->
-            <ComboBox x:Name="SearchBox" Width="250" Height="35" Margin="70,0,5,0" VerticalContentAlignment="Center "
+            <ComboBox x:Name="SearchBox" Width="250" Height="35" Margin="30,0,5,0" VerticalContentAlignment="Center "
                       
                   IsEditable="True" IsTextSearchEnabled="False"
                   KeyUp="SearchBox_TextChanged" StaysOpenOnEdit="True" />
 
 
-            <Button Width="40" Height="35" Margin="0,10,70,10" Click="SearchButton_Click" BorderBrush="{x:Null}" Background="DarkOrange">
+            <Button Width="40" Height="35" Margin="0,10,30,10" Click="SearchButton_Click" BorderBrush="{x:Null}" Background="DarkOrange">
                 <Image Source="Images/search_icon.png" Width="15" Height="15" />
             </Button>
+            <Button Content="Топ покупців"  Width="100" Height="30" Margin="10" HorizontalAlignment="Right" Click="OpenTopBuyers_Click"
+                    Background="DarkOrange" Foreground="White" FontWeight="Bold" BorderThickness="0" BorderBrush="{x:Null}"/>
 
-            <Button Content="Увійти" Width="100" Height="30" Margin="10" HorizontalAlignment="Right" Click="LoginButton_Click"
-                    Background="DarkOrange" Foreground="White" FontWeight="Bold" BorderThickness="0" BorderBrush="DarkOrange" />
-
+            <StackPanel Orientation="Vertical" Margin="20,5,20,5" VerticalAlignment="Center" Cursor="">
+                <TextBlock Text="Допомога" Margin="20,-30,20,5" Foreground="Gray" FontSize="11" Cursor="Hand"
+                   MouseLeftButtonUp="HelpText_Click" TextDecorations="Underline" Height="17" Width="80" FontWeight="SemiBold" TextAlignment="Right" />
+                <Button Content="Увійти" Width="100" Height="30" 
+                Background="DarkOrange" Foreground="White" FontWeight="Bold"
+                BorderThickness="0" BorderBrush="{x:Null}" Click="LoginButton_Click"/>
+            </StackPanel>
         </StackPanel>
 
         <!-- Основна зона перегляду -->

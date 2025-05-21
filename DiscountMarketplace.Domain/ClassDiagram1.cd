@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DiscountMarketplace.Domain.User">
+    <Position X="9" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAACBAgAAgAAAAQAIAAEAAQAACAAAQCAAAAAg=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.Admin">
+    <Position X="3.5" Y="5.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAACAAAAAAAAAQAACAAAQAgAAAAA=</HashCode>
+      <FileName>Admin.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.53" />
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.Guest">
+    <Position X="9.25" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACgABAAAAAQAAAAAAA=</HashCode>
+      <FileName>Guest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.Order">
+    <Position X="9.25" Y="16.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAEBAAAIAEJAAAEEAAAAAAAAAAAAIAAIACCA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.CartItemModel">
+    <Position X="6.25" Y="18" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIIAAAAAIQAAAAAQAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.RegisteredUser">
+    <Position X="14.25" Y="5.75" Width="3" />
+    <NestedTypes>
+      <Class Name="DiscountMarketplace.Domain.RegisteredUser.CouponEventArgs" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>RegisteredUser.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAATEAAIAAAAAAQAAAgAAAQIAAAAQAACAAQQAoEAJAA=</HashCode>
+      <FileName>RegisteredUser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" />
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.Coupon">
+    <Position X="3.25" Y="9.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AgCCAAEAAwAhAAAAAAgAAJUAQAUEQEAAAgAAAAIACAA=</HashCode>
+      <FileName>Coupon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Review">
+    <Position X="9" Y="9.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACEBAEAAAAAQACgBAAIAAAAACAAAEAAAAAAABAAAA=</HashCode>
+      <FileName>Review.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.JsonStorage">
+    <Position X="13" Y="13.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAACAAAAAgAQAAAAAAAAAAAAEUEFQAABAAAAAA=</HashCode>
+      <FileName>JsonStorage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DiscountMarketplace.Domain.PasswordHasher">
+    <Position X="11" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PasswordHasher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="DiscountMarketplace.Domain.CouponCategory">
+    <Position X="0.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAABAAAAAAAAAAAAAAAAACAAACAAgAAAAA=</HashCode>
+      <FileName>CouponCategory.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="DiscountMarketplace.Domain.PurchaseHandler" Collapsed="true">
+    <Position X="6.25" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9.22" />
+</ClassDiagram>

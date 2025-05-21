@@ -35,12 +35,8 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             JsonStorage.LoadCouponsFromJson();
             JsonStorage.LoadReviewsFromJson(RegisteredUser.GetAllUsers());
             JsonStorage.LoadOrdersFromJson(RegisteredUser.GetAllUsers(), Coupon.GetAllCoupons());
-       
-            //Coupon.InitializeTestCoupons();
-            LoadCoupons();
-         
-            //JsonStorage.LoadOrdersFromJson(RegisteredUser.GetAllUsers(), Coupon.GetAllCoupons());
 
+            LoadCoupons();
         }
 
         private void LoadCoupons(CouponCategory? category = null)
@@ -98,7 +94,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
                         Tag = coupon,
                         Margin = new Thickness(0, 5, 0, 0),
                         Background = Brushes.DarkOrange,
-                        BorderBrush = Brushes.DarkOrange,
+                        BorderThickness = new Thickness(0),
                         Foreground = Brushes.White
                     };
                     btn.Click += ViewDetails_Click;
@@ -180,15 +176,24 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
 
             private void TopUp_Click(object sender, RoutedEventArgs e)
             {
-            var window = new BalanceTopUpWindow(user); // currentUser — авторизований користувач
+            var window = new BalanceTopUpWindow(user); 
             window.ShowDialog();
         }
-
-            private void Logout_Click(object sender, RoutedEventArgs e)
+        private void OpenTopBuyers_Click(object sender, RoutedEventArgs e)
+        {
+            var topBuyersWindow = new TopBuyersWindow();
+            topBuyersWindow.ShowDialog();
+        }
+        private void Logout_Click(object sender, RoutedEventArgs e)
             {
                 new MainWindow().Show();
                 this.Close();
             }
-        
+        private void HelpText_Click(object sender, MouseButtonEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.ShowDialog();
+        }
+
     }
 }

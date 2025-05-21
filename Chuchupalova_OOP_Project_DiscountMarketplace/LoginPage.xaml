@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chuchupalova_OOP_Project_DiscountMarketplace"
         mc:Ignorable="d"
-        Title="DealHive – Вхід" Height="500" Width="400" Background="#FFF9FAFB" WindowStartupLocation="CenterScreen">
+        Title="DealHive – Вхід" Height="720" Width="1024" Background="#FFF9FAFB" WindowStartupLocation="CenterScreen">
 
     <Grid Margin="20">
 
@@ -27,17 +27,17 @@
         </Button>
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-            <Image Source="Images/DealHive.png" Height="80" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+            <Image Source="Images/DealHive.png" Height="80" Margin="0,20,0,20" HorizontalAlignment="Center"/>
 
             <TextBlock Margin="10" TextWrapping="Wrap" FontSize="14" TextAlignment="Center" Foreground="#444">
 			Увійдіть для можливості купувати купони на послуги.
             </TextBlock>
 
 
-            <Grid Margin="0,5" Height="35" Background="White">
-                <TextBox x:Name="EmailTextBox"  VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
+            <Grid Margin="0,5" Height="40" Background="White">
+                <TextBox x:Name="EmailTextBox" Height="40" VerticalContentAlignment="Center" TextChanged="TextBox_TextChanged"/>
                 <TextBlock x:Name="EmailPlaceholder" Height="40"  Text="Логін*" 
-           FontSize="13"  Foreground="Gray"  Margin="5,9.8,10,10" VerticalAlignment="Center"
+           FontSize="13"  Foreground="Gray"  Margin="5,10,10,10" VerticalAlignment="Center"
            IsHitTestVisible="False" FontFamily="Sans Serif Collection" />
             </Grid>
             <!--<Grid Margin="0,5" Height="35">
@@ -71,7 +71,9 @@
                 <Button Content="👁" Width="35" Height="35" VerticalAlignment="Top"  
             HorizontalAlignment="Right" Margin="0,0,0,0" 
             Click="TogglePasswordVisibility"/>
-            </Grid>
+            </Grid>
+
+
 
             <!-- Помилка -->
             <!--<TextBlock x:Name="ErrorTextBlock" Text="Помилка: Невірний логін або пароль" 
@@ -93,7 +95,9 @@
                 <TextBlock Text="Вже маєте акаунт? " FontSize="14" FontFamily="Sans Serif Collection"/>
                 <TextBlock Text="Зареєструватися" FontSize="14" Foreground="OrangeRed" Cursor="Hand" MouseDown="RegisterButton_Click" FontFamily="Sans Serif Collection"/>
             </StackPanel>
-
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <TextBlock Text="Увійти як адміністратор" FontSize="14" Foreground="Gray" Cursor="Hand" MouseDown="AdminButton_Click" FontFamily="Sans Serif Collection"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

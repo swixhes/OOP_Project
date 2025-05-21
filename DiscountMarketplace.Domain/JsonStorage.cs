@@ -33,10 +33,10 @@ namespace DiscountMarketplace.Domain
         public DateTime ExpirationDate { get; set; }
         public double Discount { get; set; }
         public int UsageLimit { get; set; }
-        public string Description { get; set; }  // ДОДАНО set
+        public string Description { get; set; }
         public double Price { get; set; }
         public int PurchaseCount { get; set; }
-        public string ImagePath { get; set; }  // ДОДАНО set
+        public string ImagePath { get; set; }
     }
 
     public class SerializableReview
@@ -47,17 +47,13 @@ namespace DiscountMarketplace.Domain
         public int Rating { get; set; }
         public string Comment { get; set; }
     }
-    public class CartCouponItem
-    {
-        public int CouponId { get; set; }
-        public int Quantity { get; set; }
-    }
     public static class JsonStorage
     {
         private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "users.json");
         private static string ordersFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "orders.json");
         private static string couponsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "coupons.json");
         private static string reviewsFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reviews.json");
+
         public static void SaveUsersToJson(List<RegisteredUser> users)
         {
             var data = users.Select(u => new SerializableRegisteredUser
@@ -67,7 +63,7 @@ namespace DiscountMarketplace.Domain
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 PhoneNumber = u.PhoneNumber,
-                Password = u.Password, // Треба надати public геттер
+                Password = u.Password,
                 Balance = u.Balance
             }).ToList();
 
@@ -143,8 +139,8 @@ namespace DiscountMarketplace.Domain
                 Category = c.Category,
                 UsageLimit = c.UsageLimit,
                 PurchaseCount = c.PurchaseCount,
-                Description = c.Description,      // Додано
-                ImagePath = c.ImagePath           // Додано
+                Description = c.Description,
+                ImagePath = c.ImagePath
             }).ToList();
 
             string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
@@ -204,7 +200,6 @@ namespace DiscountMarketplace.Domain
                     var author = users.FirstOrDefault(u => u.ID == r.AuthorId);
                     if (author != null)
                     {
-                        // Примусове встановлення ID
                         var review = new Review(r.CouponId, author, r.Rating, r.Comment);
                         typeof(Review).GetField("nextId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)
                             ?.SetValue(null, Math.Max(r.Id + 1, (int)typeof(Review).GetField("nextId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static)?.GetValue(null)));
