@@ -37,7 +37,7 @@ namespace Chuchupalova_OOP_Project_DiscountMarketplace
             {
                 var admin = new Admin(99, "admin@example.com", "Адмін", "Системи", "+38(000)-0000000", "admin123!");
 
-                var editor = new ACouponEditorWindow(admin);
+                var editor = new AdminWindow(admin);
                 editor.ShowDialog();
 
                 this.Close();
