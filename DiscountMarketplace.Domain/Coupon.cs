@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//SCRUM-28: Groupon Platform Analysis
 namespace DiscountMarketplace.Domain
 {
     public class Coupon
