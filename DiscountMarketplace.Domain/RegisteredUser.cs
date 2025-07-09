@@ -153,10 +153,10 @@ namespace DiscountMarketplace.Domain
             if (string.IsNullOrWhiteSpace(phone) || !Regex.IsMatch(phone, @"^\+38\(0\d{2}\)-\d{7}$"))
                 errors["Phone"] = "Невірний формат номера телефону. Очікується: +38(0XX)-XXXXXXX";
 
-            // (validation bypassed)
-            //if (string.IsNullOrWhiteSpace(password) || password.Length < 8 ||
-            //    !password.Any(char.IsDigit) || !password.Any(c => "!@#$%^&*".Contains(c)))
-            //    errors["Password"] = "Пароль має містити мінімум 8 символів, цифру та спецсимвол.";
+            // Fixed bug
+            if (string.IsNullOrWhiteSpace(password) || password.Length < 8 ||
+                !password.Any(char.IsDigit) || !password.Any(c => "!@#$%^&*".Contains(c)))
+                errors["Password"] = "Пароль має містити мінімум 8 символів, цифру та спецсимвол.";
 
             if (password != confirmPassword)
                 errors["ConfirmPassword"] = "Паролі не співпадають.";
